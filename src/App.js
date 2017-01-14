@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AddRecipe from './components/AddRecipe';
 import './App.css';
 
 class App extends Component {
@@ -24,10 +25,13 @@ class App extends Component {
           ]
       }
   }
+  addRecipe(recipe) {
+  
+  }
   render() {
     return (
         <div className='App'>
-                <AddRecipe addRecipe={this.addRecipe.bind(this)} />
+            <AddRecipe addRecipe={this.addRecipe.bind(this)} />
         </div>
     );
   }
