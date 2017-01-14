@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
 import Form from 'react-bootstrap/lib/Form';
@@ -23,6 +24,16 @@ class AddRecipe extends Component {
         this.setState({ showModal: true });
     }
     
+    submitHandler(e) {
+        e.preventDefault();
+        
+        this.props.addRecipe({
+            name: ReactDOM.findDOMNode(this.refs.name).value,
+            ingredients: ReactDOM.findDOMNode(this.refs.ingredients).value,
+            directions: ReactDOM.findDOMNode(this.refs.directions).value,
+        });
+    }
+    
     render() {
         return (
             <div>
@@ -32,13 +43,13 @@ class AddRecipe extends Component {
                     <Modal.Title>Add Recipe</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Form horizontal>
+                    <Form horizontal onSubmit={(e) => this.submitHandler(e)}>
                         <FormGroup controlId="name">
                           <Col componentClass={ControlLabel} sm={2}>
                               Name
                           </Col>
                           <Col sm={10}>
-                            <FormControl type="text" placeholder="Name" />
+                            <FormControl ref="name" type="text" placeholder="Name" />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="ingredients">
@@ -46,7 +57,7 @@ class AddRecipe extends Component {
                               Ingredients
                           </Col>
                           <Col sm={10}>
-                            <FormControl type="text" placeholder="Ingredients" />
+                            <FormControl componentClass="textarea" ref="ingredients" type="text" placeholder="Ingredients" />
                           </Col>
                         </FormGroup>
 
@@ -55,7 +66,7 @@ class AddRecipe extends Component {
                               Directions
                           </Col>
                           <Col sm={10}>
-                            <FormControl type="text" placeholder="Directions" />
+                            <FormControl componentClass="textarea" ref="directions" type="text" placeholder="Directions" />
                           </Col>
                         </FormGroup>
 
