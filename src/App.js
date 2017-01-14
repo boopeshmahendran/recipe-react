@@ -26,7 +26,11 @@ class App extends Component {
       }
   }
   addRecipe(recipe) {
-  
+      console.log(recipe);
+      this.state.recipes.push(recipe);
+      this.setState({
+          recipes: this.state.recipes
+      });
   }
   render() {
     return (

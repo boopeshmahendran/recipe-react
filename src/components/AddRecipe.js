@@ -32,6 +32,8 @@ class AddRecipe extends Component {
             ingredients: ReactDOM.findDOMNode(this.refs.ingredients).value,
             directions: ReactDOM.findDOMNode(this.refs.directions).value,
         });
+        
+        this.close();
     }
     
     render() {
