@@ -27,6 +27,7 @@ class App extends Component {
   render() {
     return (
         <div className='App'>
+                <AddRecipe addRecipe={this.addRecipe.bind(this)} />
         </div>
     );
   }
