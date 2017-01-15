@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './RecipeList.css';
 import Accordion from 'react-bootstrap/lib/Accordion';
 import Panel from 'react-bootstrap/lib/Panel';
 
