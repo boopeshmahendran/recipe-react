@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AddRecipe from './components/AddRecipe';
+import RecipeList from './components/RecipeList';
 import './App.css';
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
     return (
         <div className='App'>
             <AddRecipe addRecipe={this.addRecipe.bind(this)} />
+            <RecipeList recipes={this.state.recipes} />
         </div>
     );
   }
