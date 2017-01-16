@@ -2,14 +2,34 @@ import React, { Component } from 'react';
 import './RecipeList.css';
 import Accordion from 'react-bootstrap/lib/Accordion';
 import Panel from 'react-bootstrap/lib/Panel';
+import Button from 'react-bootstrap/lib/Button';
 
 
 class RecipeList extends Component {
+    deleteHandler(e, index) {
+        e.stopPropagation();
+        this.props.deleteRecipe(index);
+    }
     render() {
         return (
             <Accordion>
             {this.props.recipes.map((recipe, index) => (
-                 <Panel key={index} header={recipe.name} eventKey={index}>
+                 <Panel key={index} header={
+                        <div>
+                            <div className='pull-left'>
+                                <h4>{recipe.name}</h4>
+                            </div>
+                            <div className='buttons pull-right'>
+                                <Button>
+                                    <span className='glyphicon glyphicon-edit'></span>
+                                </Button>
+                                <Button onClick={(e) => this.deleteHandler(e, index)}>
+                                    <span className='glyphicon glyphicon-trash'></span>
+                                </Button>
+                            </div>
+                            <div className='clearfix'></div>
+                        </div>
+                   } eventKey={index}>
                     <div className='ingredients'>
                         <h4>Ingredients: </h4>
                         <p>{recipe.ingredients}</p>

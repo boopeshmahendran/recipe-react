@@ -33,11 +33,17 @@ class App extends Component {
           recipes: this.state.recipes
       });
   }
+  deleteRecipe(index) {
+      this.state.recipes.splice(index, 1);
+      this.setState({
+          recipes: this.state.recipes
+      });
+  }
   render() {
     return (
         <div className='App'>
             <AddRecipe addRecipe={this.addRecipe.bind(this)} />
-            <RecipeList recipes={this.state.recipes} />
+            <RecipeList recipes={this.state.recipes} deleteRecipe={this.deleteRecipe.bind(this)} />
         </div>
     );
   }
