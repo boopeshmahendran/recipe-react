@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import AddRecipe from './components/AddRecipe';
+import AddRecipeButton from './components/AddRecipeButton';
+import EditForm from './components/EditForm';
 import RecipeList from './components/RecipeList';
 import './App.css';
 
@@ -23,11 +24,11 @@ class App extends Component {
                   ingredients: "781",
                   directions: "yzx"
               },
-          ]
-      }
+          ],
+          showEditForm: false
+      };
   }
   addRecipe(recipe) {
-      console.log(recipe);
       this.state.recipes.push(recipe);
       this.setState({
           recipes: this.state.recipes
@@ -39,10 +40,21 @@ class App extends Component {
           recipes: this.state.recipes
       });
   }
+  closeEditForm() {
+      this.setState({
+          showEditForm: false
+      });
+  }
+  openEditForm() {
+      this.setState({
+          showEditForm: true
+      });
+  }
   render() {
     return (
         <div className='App'>
-            <AddRecipe addRecipe={this.addRecipe.bind(this)} />
+            <AddRecipeButton openEditForm={this.openEditForm.bind(this)} />
+            <EditForm showEditForm={this.state.showEditForm} closeEditForm={this.closeEditForm.bind(this)}  addRecipe={this.addRecipe.bind(this)}/>
             <RecipeList recipes={this.state.recipes} deleteRecipe={this.deleteRecipe.bind(this)} />
         </div>
     );

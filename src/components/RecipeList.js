@@ -20,7 +20,7 @@ class RecipeList extends Component {
                                 <h4>{recipe.name}</h4>
                             </div>
                             <div className='buttons pull-right'>
-                                <Button>
+                                <Button onClick={(e) => this.editHandler(e, index)}>
                                     <span className='glyphicon glyphicon-edit'></span>
                                 </Button>
                                 <Button onClick={(e) => this.deleteHandler(e, index)}>

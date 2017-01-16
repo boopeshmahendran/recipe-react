@@ -1,29 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
+import Button from 'react-bootstrap/lib/Button';
 import Form from 'react-bootstrap/lib/Form';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import Col from 'react-bootstrap/lib/Col';
 
-class AddRecipe extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showModal: false
-        };
-    }
-    
-    close() {
-        this.setState({ showModal: false });
-    }
-    
-    open() {
-        this.setState({ showModal: true });
-    }
-    
+class EditForm extends Component {
     submitHandler(e) {
         e.preventDefault();
         
@@ -33,14 +18,12 @@ class AddRecipe extends Component {
             directions: ReactDOM.findDOMNode(this.refs.directions).value,
         });
         
-        this.close();
+        this.props.closeEditForm();
     }
-    
+        
     render() {
         return (
-            <div>
-                <Button bsStyle="primary" block onClick={() => this.open()}> Add Recipe </Button>
-                <Modal show={this.state.showModal} onHide={() => this.close()}>
+                <Modal show={this.props.showEditForm} onHide={() => this.props.closeEditForm()}>
                   <Modal.Header closeButton>
                     <Modal.Title>Add Recipe</Modal.Title>
                   </Modal.Header>
@@ -83,12 +66,11 @@ class AddRecipe extends Component {
                       </Form>
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button onClick={() => this.close()}>Close</Button>
+                    <Button onClick={() => this.props.closeEditForm()}>Close</Button>
                   </Modal.Footer>
                 </Modal>
-            </div>
         );
     }
 }
 
-export default AddRecipe;
+export default EditForm;
