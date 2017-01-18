@@ -3,12 +3,17 @@ import './RecipeList.css';
 import Accordion from 'react-bootstrap/lib/Accordion';
 import Panel from 'react-bootstrap/lib/Panel';
 import Button from 'react-bootstrap/lib/Button';
+import Clearfix from 'react-bootstrap/lib/Clearfix';
 
 
 class RecipeList extends Component {
     deleteHandler(e, index) {
         e.stopPropagation();
         this.props.deleteRecipe(index);
+    }
+    editHandler(e, index) {
+        e.stopPropagation();
+        this.props.editRecipe(index);
     }
     render() {
         return (
@@ -27,7 +32,7 @@ class RecipeList extends Component {
                                     <span className='glyphicon glyphicon-trash'></span>
                                 </Button>
                             </div>
-                            <div className='clearfix'></div>
+                            <Clearfix />
                         </div>
                    } eventKey={index}>
                     <div className='ingredients'>

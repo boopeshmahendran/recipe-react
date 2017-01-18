@@ -12,16 +12,25 @@ class EditForm extends Component {
     submitHandler(e) {
         e.preventDefault();
         
-        this.props.addRecipe({
+        var recipe = {
             name: ReactDOM.findDOMNode(this.refs.name).value,
             ingredients: ReactDOM.findDOMNode(this.refs.ingredients).value,
             directions: ReactDOM.findDOMNode(this.refs.directions).value,
-        });
+        };
+        
+        var editData = this.props.editData;
+        if (editData) {
+            this.props.updateRecipe(recipe, editData.index);
+        }
+        else {
+            this.props.addRecipe(recipe);
+        }
         
         this.props.closeEditForm();
     }
         
     render() {
+        var editData = this.props.editData;
         return (
                 <Modal show={this.props.showEditForm} onHide={() => this.props.closeEditForm()}>
                   <Modal.Header closeButton>
@@ -34,7 +43,7 @@ class EditForm extends Component {
                               Name
                           </Col>
                           <Col sm={10}>
-                            <FormControl ref="name" type="text" placeholder="Name" />
+                            <FormControl ref="name" type="text" placeholder="Name" defaultValue={editData?editData.name:""}/>
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="ingredients">
@@ -42,7 +51,7 @@ class EditForm extends Component {
                               Ingredients
                           </Col>
                           <Col sm={10}>
-                            <FormControl componentClass="textarea" ref="ingredients" type="text" placeholder="Ingredients" />
+                            <FormControl componentClass="textarea" ref="ingredients" type="text" placeholder="Ingredients" defaultValue={editData?editData.ingredients:""}/>
                           </Col>
                         </FormGroup>
 
@@ -51,7 +60,7 @@ class EditForm extends Component {
                               Directions
                           </Col>
                           <Col sm={10}>
-                            <FormControl componentClass="textarea" ref="directions" type="text" placeholder="Directions" />
+                            <FormControl componentClass="textarea" ref="directions" type="text" placeholder="Directions" defaultValue={editData?editData.directions:""}/>
                           </Col>
                         </FormGroup>
 
