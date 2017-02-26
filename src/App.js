@@ -8,7 +8,17 @@ class App extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          recipes: [
+          recipes: [],
+          editIndex: -1,
+          showEditForm: false
+      };
+  }
+  componentDidMount() {
+      let recipes = localStorage.getItem('recipes');
+      if (recipes) {
+          this.setState({recipes: JSON.parse(recipes)});
+      } else {
+          this.setState({recipes: [
               {
                   name: "abcd",
                   ingredients: "123",
@@ -23,17 +33,21 @@ class App extends Component {
                   name: "zcw",
                   ingredients: "781",
                   directions: "yzx"
-              },
-          ],
-          editIndex: -1,
-          showEditForm: false
-      };
+              }
+          ]});
+      }
   }
+    
+  updateLocalStorage() {
+      localStorage.setItem('recipes', JSON.stringify(this.state.recipes));
+  }
+    
   addRecipe(recipe) {
       this.state.recipes.push(recipe);
       this.setState({
           recipes: this.state.recipes
       });
+      this.updateLocalStorage();
   }
   updateRecipe(recipe, index) {
       var recipes = this.state.recipes;
@@ -41,12 +55,14 @@ class App extends Component {
       this.setState({
           recipes: recipes
       });
+      this.updateLocalStorage();
   }
   deleteRecipe(index) {
       this.state.recipes.splice(index, 1);
       this.setState({
           recipes: this.state.recipes
       });
+      this.updateLocalStorage();
   }
   editRecipe(index) {
       this.setState({
